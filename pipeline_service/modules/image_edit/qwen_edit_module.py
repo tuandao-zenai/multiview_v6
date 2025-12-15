@@ -135,7 +135,7 @@ class QwenEditModule(QwenManager):
         return self._run_model_pipe(seed=seed, image=prompt_image, **kwargs)
     
     
-    def edit_image(self, prompt_image: Image.Image, seed: int):
+    def edit_image(self, prompt_image: Image.Image, seed: int, prompt: Optional[str] = None):
         """ 
         Edit the image using Qwen Edit.
 
@@ -154,6 +154,8 @@ class QwenEditModule(QwenManager):
             start_time = time.time()
 
             prompting = self.prompting.model_dump()
+            if prompt:
+                prompting["positive"] = prompt
             
             # Run the edit pipe
             result = self._run_edit_pipe(prompt_image=prompt_image,
