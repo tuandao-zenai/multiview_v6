@@ -422,6 +422,7 @@ class TrellisImageTo3DPipeline(Pipeline):
         cond = self.get_cond(images)
         cond["neg_cond"] = cond["neg_cond"][:1]
         torch.manual_seed(seed)
+        num_oversamples = max(num_samples, num_oversamples)
         ss_steps = {
             **self.sparse_structure_sampler_params,
             **sparse_structure_sampler_params,
@@ -431,6 +432,11 @@ class TrellisImageTo3DPipeline(Pipeline):
         ):
             coords = self.sample_sparse_structure(
                 cond, num_samples, sparse_structure_sampler_params
+            )
+            coords = (
+                coords
+                if num_oversamples <= num_samples
+                else self.select_coords(coords, num_samples)
             )
         slat_steps = {**self.slat_sampler_params, **slat_sampler_params}.get("steps")
         with self.inject_sampler_multi_image(
