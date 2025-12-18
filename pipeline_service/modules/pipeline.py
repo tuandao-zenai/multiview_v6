@@ -151,6 +151,14 @@ class GenerationPipeline:
         )
         image_without_background_2 = self.rmbg.remove_background(image_edited_2)
 
+        # add another view of the image
+        image_edited_3 = self.qwen_edit.edit_image(
+            prompt_image=image,
+            seed=request.seed,
+            prompt="Show this object in back view and make sure it is fully visible. Turn background neutral solid color contrasting with an object. Delete background details. Delete watermarks. Keep object colors. Sharpen image details",
+        )
+        image_without_background_3 = self.rmbg.remove_background(image_edited_3)
+
         # save to debug
         # image_edited.save("image_edited.png")
         # image_edited_2.save("image_edited_2.png")
@@ -165,7 +173,7 @@ class GenerationPipeline:
         # 3. Generate the 3D model
         trellis_result = self.trellis.generate(
             TrellisRequest(
-                images=[image_without_background, image_without_background_2],
+                images=[image_without_background, image_without_background_2, image_without_background_3],
                 seed=request.seed,
                 params=trellis_params,
             )
