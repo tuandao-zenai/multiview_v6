@@ -431,7 +431,7 @@ class TrellisImageTo3DPipeline(Pipeline):
             "sparse_structure_sampler", len(images), ss_steps, mode=mode
         ):
             coords = self.sample_sparse_structure(
-                cond, num_samples, sparse_structure_sampler_params
+                cond, num_oversamples, sparse_structure_sampler_params
             )
             coords = (
                 coords
