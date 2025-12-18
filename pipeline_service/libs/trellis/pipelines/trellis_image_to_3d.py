@@ -404,7 +404,7 @@ class TrellisImageTo3DPipeline(Pipeline):
         slat_sampler_params: dict = {},
         formats: List[str] = ["gaussian"],
         preprocess_image: bool = True,
-        mode: Literal["stochastic", "multidiffusion"] = "multidiffusion",
+        mode: Literal["stochastic", "multidiffusion"] = "stochastic",
         num_oversamples: int = 1,
     ) -> dict:
         """
