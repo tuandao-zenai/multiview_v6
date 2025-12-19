@@ -319,7 +319,7 @@ class TrellisImageTo3DPipeline(Pipeline):
         sampler_name: str,
         num_images: int,
         num_steps: int,
-        mode: Literal["stochastic", "multidiffusion"] = "multidiffusion",
+        mode: Literal["stochastic", "multidiffusion"] = "stochastic",
     ):
         """
         Inject a sampler with multiple images as condition.
