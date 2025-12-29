@@ -124,11 +124,8 @@ class GenerationPipeline:
         logger.info(f"New generation request")
 
         # Set seed
-        if request.seed < 0:
-            request.seed = secure_randint(0, 10000)
-            set_random_seed(request.seed)
-        else:
-            set_random_seed(request.seed)
+        request.seed = secure_randint(0, 10000)
+        set_random_seed(request.seed)
 
         # Decode input image
         image = decode_image(request.prompt_image)
